@@ -2,7 +2,6 @@ import "reflect-metadata";
 import "dotenv/config.js";
 import path from "path";
 import express from "express";
-import { Request, Response } from "express";
 
 import { RedisStore, redisClient } from "./config/redis";
 import session from "express-session";
@@ -33,9 +32,11 @@ const main = async () => {
 
     const app = express();
 
+    app.disable("x-powered-by");
+
     app.use(
         session({
-            name: "qid",
+            name: "sid",
             store: new RedisStore({
                 client: redisClient as any,
                 disableTouch: true,
@@ -44,7 +45,7 @@ const main = async () => {
             cookie: {
                 maxAge: 1000 * 60 * 60 * 24 * 365,
                 httpOnly: true,
-                sameSite: "lax",
+                sameSite: "lax", // set true
                 secure: production,
             },
             secret: "keyboard cat",
@@ -69,7 +70,7 @@ const main = async () => {
             credentials: true,
         })
     );
-    app.use(bodyParser.urlencoded({ extended: false }));
+    app.use(bodyParser.urlencoded({ extended: true }));
     app.use(bodyParser.json());
 
     app.get("*", (req, res) => {

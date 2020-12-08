@@ -74,6 +74,7 @@ export class UserResolver {
         }
 
         ctx.req.session!.userId = user.id;
+        ctx.req.session!.firstName = user.firstName;
         ctx.req.session!.isAdmin = user.isAdmin;
 
         return user;
