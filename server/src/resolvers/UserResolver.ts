@@ -15,12 +15,14 @@ import { isAdmin } from "../utils/permissions";
 
 @Resolver(User)
 export class UserResolver {
+    // USERS
     @Query(() => [User])
     @UseMiddleware(isAdmin)
     async Users(): Promise<User[]> {
         return await User.find();
     }
 
+    // ME
     @Query(() => User, { nullable: true })
     Me(@Ctx() { req }: IContext) {
         // you are not logged in
@@ -30,6 +32,7 @@ export class UserResolver {
         return User.findOne(req.session.userId);
     }
 
+    // REGISTER
     @Mutation(() => Boolean)
     async Register(
         @Arg("firstName") firstName: string,
@@ -55,6 +58,7 @@ export class UserResolver {
         return true;
     }
 
+    // LOGIN
     @Mutation(() => User, { nullable: true })
     async Login(
         @Arg("email") email: string,
