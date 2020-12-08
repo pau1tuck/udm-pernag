@@ -3,8 +3,7 @@ import ReactDOM from "react-dom";
 import { ApolloProvider } from "@apollo/client";
 import { client } from "./config/apollo";
 import { BrowserRouter } from "react-router-dom";
-import "./index.css";
-import App from "./App";
+import App from "./components/_App";
 
 ReactDOM.render(
     <React.StrictMode>

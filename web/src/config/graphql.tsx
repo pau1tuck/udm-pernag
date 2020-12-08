@@ -103,9 +103,26 @@ export type TrackInput = {
     youTubeId: Scalars["String"];
 };
 
-export type Unnamed_1_QueryVariables = Exact<{ [key: string]: never }>;
+export type MeQueryVariables = Exact<{ [key: string]: never }>;
 
-export type Unnamed_1_Query = { __typename?: "Query" } & {
+export type MeQuery = { __typename?: "Query" } & {
+    Me?: Maybe<
+        { __typename?: "User" } & Pick<
+            User,
+            | "id"
+            | "firstName"
+            | "lastName"
+            | "country"
+            | "email"
+            | "isMember"
+            | "isAdmin"
+        >
+    >;
+};
+
+export type TracksQueryVariables = Exact<{ [key: string]: never }>;
+
+export type TracksQuery = { __typename?: "Query" } & {
     Tracks: Array<
         { __typename?: "Track" } & Pick<
             Track,
@@ -121,8 +138,53 @@ export type Unnamed_1_Query = { __typename?: "Query" } & {
     >;
 };
 
-export const Document = gql`
-    {
+export const MeDocument = gql`
+    query me {
+        Me {
+            id
+            firstName
+            lastName
+            country
+            email
+            isMember
+            isAdmin
+        }
+    }
+`;
+
+/**
+ * __useMeQuery__
+ *
+ * To run a query within a React component, call `useMeQuery` and pass it any options that fit your needs.
+ * When your component renders, `useMeQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useMeQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useMeQuery(
+    baseOptions?: Apollo.QueryHookOptions<MeQuery, MeQueryVariables>
+) {
+    return Apollo.useQuery<MeQuery, MeQueryVariables>(MeDocument, baseOptions);
+}
+export function useMeLazyQuery(
+    baseOptions?: Apollo.LazyQueryHookOptions<MeQuery, MeQueryVariables>
+) {
+    return Apollo.useLazyQuery<MeQuery, MeQueryVariables>(
+        MeDocument,
+        baseOptions
+    );
+}
+export type MeQueryHookResult = ReturnType<typeof useMeQuery>;
+export type MeLazyQueryHookResult = ReturnType<typeof useMeLazyQuery>;
+export type MeQueryResult = Apollo.QueryResult<MeQuery, MeQueryVariables>;
+export const TracksDocument = gql`
+    query tracks {
         Tracks {
             id
             artist
@@ -137,30 +199,39 @@ export const Document = gql`
 `;
 
 /**
- * __useQuery__
+ * __useTracksQuery__
  *
- * To run a query within a React component, call `useQuery` and pass it any options that fit your needs.
- * When your component renders, `useQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * To run a query within a React component, call `useTracksQuery` and pass it any options that fit your needs.
+ * When your component renders, `useTracksQuery` returns an object from Apollo Client that contains loading, error, and data properties
  * you can use to render your UI.
  *
  * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
  *
  * @example
- * const { data, loading, error } = useQuery({
+ * const { data, loading, error } = useTracksQuery({
  *   variables: {
  *   },
  * });
  */
-export function useQuery(
-    baseOptions?: Apollo.QueryHookOptions<Query, QueryVariables>
+export function useTracksQuery(
+    baseOptions?: Apollo.QueryHookOptions<TracksQuery, TracksQueryVariables>
 ) {
-    return Apollo.useQuery<Query, QueryVariables>(Document, baseOptions);
+    return Apollo.useQuery<TracksQuery, TracksQueryVariables>(
+        TracksDocument,
+        baseOptions
+    );
 }
-export function useLazyQuery(
-    baseOptions?: Apollo.LazyQueryHookOptions<Query, QueryVariables>
+export function useTracksLazyQuery(
+    baseOptions?: Apollo.LazyQueryHookOptions<TracksQuery, TracksQueryVariables>
 ) {
-    return Apollo.useLazyQuery<Query, QueryVariables>(Document, baseOptions);
+    return Apollo.useLazyQuery<TracksQuery, TracksQueryVariables>(
+        TracksDocument,
+        baseOptions
+    );
 }
-export type QueryHookResult = ReturnType<typeof useQuery>;
-export type LazyQueryHookResult = ReturnType<typeof useLazyQuery>;
-export type QueryResult = Apollo.QueryResult<Query, QueryVariables>;
+export type TracksQueryHookResult = ReturnType<typeof useTracksQuery>;
+export type TracksLazyQueryHookResult = ReturnType<typeof useTracksLazyQuery>;
+export type TracksQueryResult = Apollo.QueryResult<
+    TracksQuery,
+    TracksQueryVariables
+>;
