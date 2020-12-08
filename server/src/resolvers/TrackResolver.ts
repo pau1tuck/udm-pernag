@@ -48,36 +48,9 @@ class PaginatedTracks {
 }
 @Resolver(Track)
 export class TrackResolver {
-    @Query(() => PaginatedTracks)
-    async Tracks(
-        @Arg("limit", () => Int) limit: number,
-        @Arg("cursor", () => String, { nullable: true }) cursor: string | null
-    ): Promise<PaginatedTracks> {
-        // 20 -> 21
-        const realLimit = Math.min(50, limit);
-        const reaLimitPlusOne = realLimit + 1;
-
-        const replacements: any[] = [reaLimitPlusOne];
-
-        if (cursor) {
-            replacements.push(new Date(parseInt(cursor)));
-        }
-
-        const tracks = await getConnection().query(
-            `
-      select p.*
-      from track p
-      ${cursor ? `where p."createdAt" < $2` : ""}
-      order by p."createdAt" DESC
-      limit $1
-      `,
-            replacements
-        );
-
-        return {
-            tracks: tracks.slice(0, realLimit),
-            hasMore: tracks.length === reaLimitPlusOne,
-        };
+    @Query(() => [Track])
+    async Tracks(): Promise<Track[]> {
+        return await Track.find();
     }
 
     @Query(() => Track, { nullable: true })

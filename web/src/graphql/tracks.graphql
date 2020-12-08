@@ -1,0 +1,12 @@
+query {
+    Tracks {
+        id
+        artist
+        title
+        version
+        label
+        youTubeId
+        points
+        updatedAt
+    }
+}

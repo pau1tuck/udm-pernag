@@ -73,8 +73,8 @@ const main = async () => {
     app.use(bodyParser.urlencoded({ extended: true }));
     app.use(bodyParser.json());
 
-    app.get("*", (req, res) => {
-        res.sendFile(path.join(__dirname + "/web/build/index.html"));
+    app.get("/", (req, res) => {
+        res.send("Hello, Bastard.");
     });
 
     apolloServer.applyMiddleware({ app });
