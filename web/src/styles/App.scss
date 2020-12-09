@@ -1,5 +1,6 @@
 @import "partials/typography";
 @import "partials/Navbar";
+@import "partials/Header";
 
 * {
     box-sizing: border-box;
@@ -8,7 +9,7 @@
 }
 
 body {
-    background-image: url(../assets/images/bg.jpg);
+    background-image: url(../assets/images/background.jpg);
     background-size: cover;
     background-repeat: no-repeat;
     background-attachment: fixed;

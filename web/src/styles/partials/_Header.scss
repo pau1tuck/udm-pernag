@@ -1,0 +1,43 @@
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+@keyframes title {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+.header h1 {
+    font-family: "Michroma", sans-serif;
+    color: #aaaaaa;
+    font-size: 12px;
+    font-weight: 600;
+    word-spacing: 6px;
+    animation-name: title;
+    animation-direction: alternate-reverse;
+    animation-duration: 4s;
+    animation-delay: 2s;
+    animation-iteration-count: infinite;
+}
+
+@media (max-width: 568px) {
+    .header img {
+        height: 50%;
+        width: 50%;
+        margin-top: -10px;
+    }
+    .title p {
+        font-size: 10px;
+    }
+}
+
+@media (min-width: 568px) {
+    .header img {
+        margin-top: -40px;
+    }
+}
