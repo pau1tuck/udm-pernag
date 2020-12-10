@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { IoMdClose } from "react-icons/io";
 
@@ -22,7 +23,9 @@ export const Navbar = () => {
                 </span>
                 <ul className="navbar_items">
                     <li className="navbar_item">
-                        <a href="#">Log in</a>
+                        <Link to="/login">
+                            <a href="#">Log in</a>
+                        </Link>
                     </li>
                     <li className="navbar_item navbar_item-signup">
                         <a href="#">Sign up</a>

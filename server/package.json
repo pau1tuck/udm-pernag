@@ -5,11 +5,11 @@
     "author": "@pau1tuck",
     "license": "MIT",
     "scripts": {
-        "start": "node dist/server.js",
+        "start": "node dist/index.js",
         "build": "rm -rf dist && tsc",
         "dev": "concurrently \"yarn dev:ts\" \"yarn dev:node\"",
-        "dev:ts": "tsc --watch",
-        "dev:node": "nodemon dist/server.js"
+        "compile": "tsc --watch",
+        "dev:node": "nodemon dist/index.js"
     },
     "devDependencies": {
         "@types/bcryptjs": "^2.4.2",

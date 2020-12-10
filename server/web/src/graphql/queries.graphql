@@ -1,3 +1,14 @@
+query me {
+    Me {
+        id
+        firstName
+        lastName
+        country
+        email
+        isMember
+        isAdmin
+    }
+}
 query tracks {
     Tracks {
         id

@@ -27,7 +27,7 @@ class Hello {
     }
 }
 
-const main = async () => {
+const server = async () => {
     const orm: Connection = await createConnection(database);
 
     const app = express();
@@ -74,7 +74,7 @@ const main = async () => {
     app.use(bodyParser.json());
 
     app.get("/", (req, res) => {
-        res.send("Hello, Bastard.");
+        res.sendFile(path.join(__dirname + "/client/build/index.html"));
     });
 
     apolloServer.applyMiddleware({ app });
@@ -83,6 +83,6 @@ const main = async () => {
         console.log(`Server running on http://localhost:${process.env.PORT}.`);
     });
 };
-main().catch((err) => {
+server().catch((err) => {
     console.error(err);
 });
